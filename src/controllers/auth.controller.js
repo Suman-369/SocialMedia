@@ -2,6 +2,7 @@
 const userModel = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 
+// write API logic for the  user  registration
 async function registerController(req,res){
     const {username,password} = req.body
 
