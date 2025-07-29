@@ -34,6 +34,8 @@ async function registerController(req,res){
     })
 }
 
+//Write API logic for the user Login Details
+
 async function loginController(req,res){
     const {username,password} = req.body
 
