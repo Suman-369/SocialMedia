@@ -5,7 +5,7 @@ const router = express.Router()
 // register 
 
 router.post("/register",registerController)
-
+// Login
 router.post("/login",loginController)
 
 module.exports = router
