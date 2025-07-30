@@ -1,6 +1,7 @@
 
 const userModel = require('../models/user.model');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
 // write API logic for the  user  registration
 async function registerController(req,res){
@@ -18,7 +19,7 @@ async function registerController(req,res){
 
     const user = await userModel.create({
         username,
-        password
+        password: await bcrypt.hash(password, 10 )
     })
 
     const token = jwt.sign({
@@ -47,7 +48,7 @@ async function loginController(req,res){
         })
     }
 
-    const isCorrectPassword = user.password === password
+    const isCorrectPassword = await bcrypt.compare(password, user.password)
 
     if(!isCorrectPassword){
         return res.status(401).json({
