@@ -17,6 +17,8 @@ async function registerController(req,res){
         })
     }
 
+// Using bcrypt method to  secure user password
+    
     const user = await userModel.create({
         username,
         password: await bcrypt.hash(password, 10 )
