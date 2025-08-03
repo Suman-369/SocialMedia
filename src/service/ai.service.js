@@ -15,7 +15,7 @@ async function main() {
 
 main();
 
-async function generateContent(base64ImageFile) {
+async function generateCaption(base64ImageFile) {
   
   const contents = [
     {
@@ -35,3 +35,7 @@ const response = await ai.models.generateContent({
 return response.text;
 
 }
+
+module.exports = generateCaption
+
+
