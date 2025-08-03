@@ -15,6 +15,9 @@ async function main() {
 
 main();
 
+// This function can be used to generate a caption for an image
+
+
 async function generateContent(base64ImageFile) {
   
   const contents = [
