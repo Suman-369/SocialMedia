@@ -1,5 +1,4 @@
 
-// Set Gemini Api Key
 
 const  { GoogleGenAI }  = require("@google/genai");
 
@@ -15,3 +14,24 @@ async function main() {
 }
 
 main();
+
+async function generateContent(base64ImageFile) {
+  
+  const contents = [
+    {
+      inlineData: {
+        mimeType: "image/jpeg",
+        data: base64ImageFile,
+      },
+    },
+    { text: "Caption this image." },
+  ];
+
+const response = await ai.models.generateContent({
+  model: "gemini-2.5-flash",
+  contents: contents,
+});
+
+return response.text;
+
+}
