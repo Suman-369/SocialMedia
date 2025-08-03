@@ -15,6 +15,9 @@ async function main() {
 
 main();
 
+// This function can be used to generate a caption for an image
+
+
 async function generateCaption(base64ImageFile) {
   
   const contents = [
@@ -35,7 +38,3 @@ const response = await ai.models.generateContent({
 return response.text;
 
 }
-
-module.exports = generateCaption
-
-
