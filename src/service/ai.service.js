@@ -19,7 +19,7 @@ const ai = new GoogleGenAI({
 },
 { text: "Caption this image." },
 ];
-
+//give prompt to ai for generate coaption 
 const response = await ai.models.generateContent({
     model: "gemini-2.5-flash",
     contents: contents,
