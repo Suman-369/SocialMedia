@@ -1,40 +1,41 @@
 
+require("dotenv").config()
+const  { GoogleGenAI } = require("@google/genai");
 
-const  { GoogleGenAI }  = require("@google/genai");
-
-// The client gets the API key from the environment variable `GEMINI_API_KEY`.
-const ai = new GoogleGenAI({});
-
-async function main() {
-  const response = await ai.models.generateContent({
-    model: "gemini-2.5-flash",
-    contents: "Explain how AI works in a few words",
-  });
-  console.log(response.text);
-}
-
-main();
-
-// This function can be used to generate a caption for an image
-
-
-async function generateCaption(base64ImageFile) {
-  
-  const contents = [
-    {
-      inlineData: {
-        mimeType: "image/jpeg",
-        data: base64ImageFile,
-      },
-    },
-    { text: "Caption this image." },
-  ];
-
-const response = await ai.models.generateContent({
-  model: "gemini-2.5-flash",
-  contents: contents,
+const ai = new GoogleGenAI({
+  apiKey: process.env.GEMINI_API_KEY,
 });
 
-return response.text;
 
+ async function generateCaption(base64ImageFile){
+
+    
+    const contents = [
+    {
+    inlineData: {
+      mimeType: "image/jpeg",
+      data: base64ImageFile,
+    },
+},
+{ text: "Caption this image." },
+];
+
+const response = await ai.models.generateContent({
+    model: "gemini-2.5-flash",
+    contents: contents,
+    config: {
+      systemInstruction: `
+      You are an expert in generating captions for images.
+      You generate single caption for this image.
+      Your caption Should be short and concise.
+      Use Tapori Language with asthetic style,
+      Using dark humor in it,
+      You Use hashtags and emojis in your caption.
+      `
+    },
+});
+return response.text;
 }
+
+
+module.exports = generateCaption
